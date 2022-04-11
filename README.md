@@ -70,3 +70,5 @@ Niatnya mau pakai template, tapi karena belum kebayang jadinya tidak pakai.
 ```s
 php artisan make:model --a
 ```
+
+## Fase 05 : Buat Category modal

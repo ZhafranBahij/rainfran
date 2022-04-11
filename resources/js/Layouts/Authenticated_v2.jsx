@@ -35,7 +35,8 @@ export default function Authenticated({ auth, header, children }) {
                     </a>
                     <a
                         // method="post"
-                        href={route("dashboard")}
+                        // href={route("category")}
+                        href="category"
                         className="w-full flex justify-center"
                     >
                         <DocumentIcon className="h-8 text-violet-500 hover:text-violet-300" />
@@ -50,7 +51,7 @@ export default function Authenticated({ auth, header, children }) {
                 </div>
             </nav>
 
-            <main className="basis-auto">{children}</main>
+            <main className="basis-auto px-10 py-5">{children}</main>
         </div>
     );
 }

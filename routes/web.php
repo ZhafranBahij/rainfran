@@ -24,10 +24,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('category', 'CategoryController');
+Route::resource('/category', 'App\Http\Controllers\CategoryController')->names("category");
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard2');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/test', function () {
+    return Inertia::render('test');
+})->middleware(['auth', 'verified'])->name('test');
 
 require __DIR__.'/auth.php';
