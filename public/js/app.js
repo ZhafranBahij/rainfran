@@ -5631,7 +5631,7 @@ function VerifyEmail(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Dashboard)
+/* harmony export */   "default": () => (/* binding */ Category)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Layouts_Authenticated_v2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Authenticated_v2 */ "./resources/js/Layouts/Authenticated_v2.jsx");
@@ -5651,7 +5651,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function Dashboard(props) {
+function Category(props) {
   // const data2 = props.categories.map((category) => )
   var data = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
     return props.categories;

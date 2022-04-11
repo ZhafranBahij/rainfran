@@ -3,7 +3,7 @@ import Authenticated from "@/Layouts/Authenticated_v2";
 import { Head } from "@inertiajs/inertia-react";
 import { useTable, usePagination, useFilter } from "react-table";
 
-export default function Dashboard(props) {
+export default function Category(props) {
     // const data2 = props.categories.map((category) => )
 
     const data = React.useMemo(() => props.categories, []);
