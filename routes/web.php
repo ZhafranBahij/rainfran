@@ -24,6 +24,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::resource('category', 'CategoryController');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard2');
 })->middleware(['auth', 'verified'])->name('dashboard');

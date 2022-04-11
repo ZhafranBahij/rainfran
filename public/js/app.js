@@ -5621,6 +5621,16 @@ function VerifyEmail(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Category/index.jsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Pages/Category/index.jsx ***!
+  \***********************************************/
+/***/ (() => {
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Dashboard.js":
 /*!*****************************************!*\
   !*** ./resources/js/Pages/Dashboard.js ***!
@@ -59446,6 +59456,10 @@ var map = {
 	"./Auth/ResetPassword.js": "./resources/js/Pages/Auth/ResetPassword.js",
 	"./Auth/VerifyEmail": "./resources/js/Pages/Auth/VerifyEmail.js",
 	"./Auth/VerifyEmail.js": "./resources/js/Pages/Auth/VerifyEmail.js",
+	"./Category": "./resources/js/Pages/Category/index.jsx",
+	"./Category/": "./resources/js/Pages/Category/index.jsx",
+	"./Category/index": "./resources/js/Pages/Category/index.jsx",
+	"./Category/index.jsx": "./resources/js/Pages/Category/index.jsx",
 	"./Dashboard": "./resources/js/Pages/Dashboard.js",
 	"./Dashboard.js": "./resources/js/Pages/Dashboard.js",
 	"./Dashboard2": "./resources/js/Pages/Dashboard2.jsx",

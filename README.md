@@ -64,3 +64,9 @@ Di sini, hanya buat-buat saja, tidak ada yang perlu dipersiapkan juga sihh...
 ## Fase 03 : Buat sidebar admin dashboard
 
 Niatnya mau pakai template, tapi karena belum kebayang jadinya tidak pakai.
+
+## Fase 04 : Buat Category modal
+
+```s
+php artisan make:model --a
+```
