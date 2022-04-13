@@ -30,15 +30,37 @@ export default function Category(props) {
         []
     );
 
-    const tableInstance = useTable({ columns, data });
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        page,
+        nextPage,
+        previousPage,
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        state,
+        gotoPage,
+        pageCount,
+        setPageSize,
+        prepareRow,
+    } = useTable(
+        {
+            columns,
+            data,
+            initialState: { pageIndex: 1 },
+        },
+        usePagination
+    );
 
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-        tableInstance;
+    const { pageIndex, pageSize } = state;
 
     return (
         <Authenticated auth={props.auth} errors={props.errors}>
             <Head title="Category" />
             {/* // apply the table props */}
+            {/* {console.log(state.pageSize)} */}
             <div class="p-4">
                 <label for="table-search" class="sr-only">
                     Search
@@ -101,7 +123,7 @@ export default function Category(props) {
                 <tbody {...getTableBodyProps()}>
                     {
                         // Loop over the table rows
-                        rows.map((row) => {
+                        page.map((row) => {
                             // Prepare the row for display
                             prepareRow(row);
                             return (
@@ -136,6 +158,72 @@ export default function Category(props) {
                     }
                 </tbody>
             </table>
+
+            <div className="mt-3">
+                <button
+                    type="button"
+                    className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                    onClick={() => gotoPage(0)}
+                    disabled={!canPreviousPage}
+                >
+                    {"<<"}
+                </button>{" "}
+                <button
+                    type="button"
+                    className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                    onClick={() => previousPage()}
+                    disabled={!canPreviousPage}
+                >
+                    Previous
+                </button>{" "}
+                <button
+                    type="button"
+                    className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                    onClick={() => nextPage()}
+                    disabled={!canNextPage}
+                >
+                    Next
+                </button>{" "}
+                <button
+                    type="button"
+                    className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                    onClick={() => gotoPage(pageCount - 1)}
+                    disabled={!canNextPage}
+                >
+                    {">>"}
+                </button>{" "}
+                <span className="text-white">
+                    Page{" "}
+                    <strong>
+                        {pageIndex + 1} of {pageOptions.length}
+                    </strong>{" "}
+                </span>
+                <span className="text-white">
+                    | Go to page:{" "}
+                    <input
+                        type="number"
+                        defaultValue={pageIndex + 1}
+                        onChange={(e) => {
+                            const pageNumber = e.target.value
+                                ? Number(e.target.value) - 1
+                                : 0;
+                            gotoPage(pageNumber);
+                        }}
+                        style={{ width: "50px" }}
+                        className="text-black"
+                    />
+                </span>{" "}
+                <select
+                    value={pageSize}
+                    onChange={(e) => setPageSize(Number(e.target.value))}
+                >
+                    {[10, 25, 50].map((pageSize) => (
+                        <option key={pageSize} value={pageSize}>
+                            Show {pageSize}
+                        </option>
+                    ))}
+                </select>
+            </div>
         </Authenticated>
     );
 }

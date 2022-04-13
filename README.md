@@ -119,4 +119,4 @@ export default function Category(props) {
 
 Untuk _styling table_ , pakai [flowbite](https://flowbite.com/docs/components/tables/) .
 
-Masih berlanjut gan...
+Saat membuat tabel menjadi _pagination_ , lihat tutorial ini [cloudnweb](https://cloudnweb.dev/2021/06/react-table-pagination/) untuk lebih jelas. Alangkah baiknya jika mengecek codesandbox punya beliau juga.

@@ -5672,15 +5672,31 @@ function Category(props) {
       accessor: "updated_at"
     }];
   }, []);
-  var tableInstance = (0,react_table__WEBPACK_IMPORTED_MODULE_3__.useTable)({
+
+  var _useTable = (0,react_table__WEBPACK_IMPORTED_MODULE_3__.useTable)({
     columns: columns,
-    data: data
-  });
-  var getTableProps = tableInstance.getTableProps,
-      getTableBodyProps = tableInstance.getTableBodyProps,
-      headerGroups = tableInstance.headerGroups,
-      rows = tableInstance.rows,
-      prepareRow = tableInstance.prepareRow;
+    data: data,
+    initialState: {
+      pageIndex: 1
+    }
+  }, react_table__WEBPACK_IMPORTED_MODULE_3__.usePagination),
+      getTableProps = _useTable.getTableProps,
+      getTableBodyProps = _useTable.getTableBodyProps,
+      headerGroups = _useTable.headerGroups,
+      page = _useTable.page,
+      nextPage = _useTable.nextPage,
+      previousPage = _useTable.previousPage,
+      canPreviousPage = _useTable.canPreviousPage,
+      canNextPage = _useTable.canNextPage,
+      pageOptions = _useTable.pageOptions,
+      state = _useTable.state,
+      gotoPage = _useTable.gotoPage,
+      pageCount = _useTable.pageCount,
+      setPageSize = _useTable.setPageSize,
+      prepareRow = _useTable.prepareRow;
+
+  var pageIndex = state.pageIndex,
+      pageSize = state.pageSize;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_Layouts_Authenticated_v2__WEBPACK_IMPORTED_MODULE_1__["default"], {
     auth: props.auth,
     errors: props.errors,
@@ -5745,7 +5761,7 @@ function Category(props) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", _objectSpread(_objectSpread({}, getTableBodyProps()), {}, {
         children: // Loop over the table rows
-        rows.map(function (row) {
+        page.map(function (row) {
           // Prepare the row for display
           prepareRow(row);
           return (
@@ -5772,7 +5788,72 @@ function Category(props) {
           );
         })
       }))]
-    }))]
+    })), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "mt-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        type: "button",
+        className: "text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900",
+        onClick: function onClick() {
+          return gotoPage(0);
+        },
+        disabled: !canPreviousPage,
+        children: "<<"
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        type: "button",
+        className: "text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900",
+        onClick: function onClick() {
+          return previousPage();
+        },
+        disabled: !canPreviousPage,
+        children: "Previous"
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        type: "button",
+        className: "text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900",
+        onClick: function onClick() {
+          return nextPage();
+        },
+        disabled: !canNextPage,
+        children: "Next"
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+        type: "button",
+        className: "text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900",
+        onClick: function onClick() {
+          return gotoPage(pageCount - 1);
+        },
+        disabled: !canNextPage,
+        children: ">>"
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+        className: "text-white",
+        children: ["Page", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("strong", {
+          children: [pageIndex + 1, " of ", pageOptions.length]
+        }), " "]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
+        className: "text-white",
+        children: ["| Go to page:", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          type: "number",
+          defaultValue: pageIndex + 1,
+          onChange: function onChange(e) {
+            var pageNumber = e.target.value ? Number(e.target.value) - 1 : 0;
+            gotoPage(pageNumber);
+          },
+          style: {
+            width: "50px"
+          },
+          className: "text-black"
+        })]
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("select", {
+        value: pageSize,
+        onChange: function onChange(e) {
+          return setPageSize(Number(e.target.value));
+        },
+        children: [10, 25, 50].map(function (pageSize) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("option", {
+            value: pageSize,
+            children: ["Show ", pageSize]
+          }, pageSize);
+        })
+      })]
+    })]
   });
 }
 

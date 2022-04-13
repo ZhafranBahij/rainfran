@@ -17,12 +17,12 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::factory()
-        ->count(3)            
-        ->state(new Sequence(
-            ['name' => 'Anime'],
-            ['name' => 'Tech'],
-            ['name' => 'Game'],
-        ))
+        ->count(30)            
+        // ->state(new Sequence(
+        //     ['name' => 'Anime'],
+        //     ['name' => 'Tech'],
+        //     ['name' => 'Game'],
+        // ))
         ->create();
     }
 }
