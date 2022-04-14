@@ -9,6 +9,8 @@ import {
     useGlobalFilter,
 } from "react-table";
 import "regenerator-runtime/runtime";
+import { Inertia } from "@inertiajs/inertia";
+import { values } from "lodash";
 
 // Component for Global Filter
 function GlobalFilter({
@@ -51,6 +53,8 @@ export default function Tabledata({ columns, data }) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
+        rows,
+        prepareRow,
 
         // Pagination
         page,
@@ -63,11 +67,9 @@ export default function Tabledata({ columns, data }) {
         gotoPage,
         pageCount,
         setPageSize,
-        prepareRow,
 
         // Filter
         setFilter,
-        rows,
 
         //! Bawah ini buat ngaktifin global filter
         // visibleColumns,
@@ -77,11 +79,11 @@ export default function Tabledata({ columns, data }) {
         {
             columns,
             data,
-            initialState: { pageIndex: 0 },
+            initialState: { pageIndex: 0 }, //Page index kudu 0 agar bisa menggunakan filter
         },
-        useFilters,
+        useFilters, // Untuk Filter
         // useGlobalFilter,
-        usePagination
+        usePagination // Untuk Buat pagination
     );
 
     const handleFilterChange = (e) => {
@@ -95,6 +97,15 @@ export default function Tabledata({ columns, data }) {
     };
 
     const { pageIndex, pageSize } = state;
+
+    function handleClickDelete(e) {
+        // e.preventDefault();
+        const value = e.target.value;
+        Inertia.delete(`/category/${value}`, {
+            onBefore: () =>
+                confirm("Are you sure you want to delete this Category?"),
+        });
+    }
 
     return (
         <>
@@ -161,6 +172,7 @@ export default function Tabledata({ columns, data }) {
                                     ))
                                 }
                                 <th className="px-6 py-3">Edit</th>
+                                <th className="px-6 py-3 ">Delete</th>
                             </tr>
                         ))
                     }
@@ -195,8 +207,21 @@ export default function Tabledata({ columns, data }) {
                                             );
                                         })
                                     }
+                                    {/* {console.log(row.cells[0].value)} */}
                                     <td className="px-6 py-4">
                                         <a href={route("dashboard")}>Edit</a>
+                                    </td>
+                                    <td className="px-6 py-4 text-red-600">
+                                        <form>
+                                            <button
+                                                type="submit"
+                                                className="text-red-600"
+                                                value={row.cells[0].value}
+                                                onClick={handleClickDelete}
+                                            >
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             );

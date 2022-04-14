@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -41,6 +42,9 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         //
+        // dd($request);
+        Category::create($request->all());
+        return Redirect::route('category.index');
     }
 
     /**
@@ -84,7 +88,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
-    {
-        //
+    {   
+        // dd($category);
+        Category::destroy($category['id']);
+        return Redirect::route('category.index');
     }
 }

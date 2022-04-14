@@ -3,6 +3,7 @@ import Authenticated from "@/Layouts/Authenticated_v2";
 import { Head } from "@inertiajs/inertia-react";
 import { useTable, useFilters, usePagination } from "react-table";
 import Tabledata from "../../Components/Tabledata";
+import Modal from "../../Components/Modal";
 
 export default function Category(props) {
     // const data2 = props.categories.map((category) => )
@@ -36,6 +37,7 @@ export default function Category(props) {
             <Head title="Category" />
             {/* // apply the table props */}
             {/* {console.log(state.pageSize)} */}
+            <Modal />
             <Tabledata columns={columns} data={data} />
         </Authenticated>
     );
