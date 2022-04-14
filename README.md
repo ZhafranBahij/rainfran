@@ -120,3 +120,100 @@ export default function Category(props) {
 Untuk _styling table_ , pakai [flowbite](https://flowbite.com/docs/components/tables/) .
 
 Saat membuat tabel menjadi _pagination_ , lihat tutorial ini [cloudnweb](https://cloudnweb.dev/2021/06/react-table-pagination/) untuk lebih jelas. Alangkah baiknya jika mengecek codesandbox punya beliau juga.
+
+Saat membuat table dengan _filter_ , lihat tutorial ini [filter](https://blog.bitsrc.io/react-table-the-headless-table-library-for-react-2eb8c6ac98f1) untuk lebih jelas. Lihat terutama step 1 - 3. Jangan lupa,
+_page index_ kudu 0.
+
+## Fase 06 : Buat Button Create
+
+1. Buka Headless UI lalu copas modal dari sono. Diatur sedemikian rupa agar sesuai keinginan.
+
+2. Buka Inertia JS bagian form
+
+3. Codingan di handle submit
+
+```s
+function handleSubmit(e) {
+    e.preventDefault();
+    Inertia.post("/category", values);
+    setIsOpen(false);
+}
+```
+
+## Fase 07 : Buat Button Delete dan Edit
+
+1. Untuk Delete
+
+> Gunakan ini untuk button, untuk value itu berisi id.
+
+```s
+    <form>
+        <button
+            type="submit"
+            className="text-red-600"
+            value={row.cells[0].value}
+            onClick={handleClickDelete}
+        >
+            Delete
+        </button>
+    </form>
+```
+
+> Gunakan ini di bagian function handleClickDelete
+
+```s
+    function handleClickDelete(e) {
+        // e.preventDefault();
+        const value = e.target.value;
+        Inertia.delete(`/category/${value}`, {
+            onBefore: () =>
+                confirm("Are you sure you want to delete this Category?"),
+        });
+    }
+```
+
+> Untuk Controller delete, lakukan pada umumnya.
+
+2. Untuk Edit
+
+> Gunakan ini untuk button, untuk value itu berisi id. Modal tersebut telah diedit sedemikian rupa.
+
+```s
+    <Modal
+        nowData={row.cells}
+        nameButton="Edit"
+    />
+```
+
+> Buat handleSubmit seperti ini
+
+```s
+function handleSubmit(e) {
+    e.preventDefault();
+    if (nowData[0] === "") {
+        Inertia.post("/category", values);
+    } else {
+        Inertia.put(`/category/${values.id}`, values);
+    }
+
+    setIsOpen(false);
+}
+```
+
+> Bagian paling atas ada ini
+
+```s
+export default function MyModal({
+    nowData = ["", ""],
+    nameButton = "Create New",
+})
+```
+
+> Bagian Value
+
+```s
+    const [values, setValues] = useState({
+        id: nowData[0].value,
+        name: nowData[1].value,
+    });
+```
