@@ -36,7 +36,6 @@ export default function Category(props) {
         <Authenticated auth={props.auth} errors={props.errors}>
             <Head title="Category" />
             {/* // apply the table props */}
-            {/* {console.log(state.pageSize)} */}
             <Modal />
             <Tabledata columns={columns} data={data} />
         </Authenticated>

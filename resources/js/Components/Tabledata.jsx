@@ -1,6 +1,4 @@
 import React from "react";
-import Authenticated from "@/Layouts/Authenticated_v2";
-import { Head } from "@inertiajs/inertia-react";
 import {
     useTable,
     useFilters,
@@ -10,7 +8,7 @@ import {
 } from "react-table";
 import "regenerator-runtime/runtime";
 import { Inertia } from "@inertiajs/inertia";
-import { values } from "lodash";
+import Modal from "./Modal";
 
 // Component for Global Filter
 function GlobalFilter({
@@ -88,7 +86,7 @@ export default function Tabledata({ columns, data }) {
 
     const handleFilterChange = (e) => {
         const value = e.target.value;
-        console.log(value);
+        // console.log(value);
         setFilter("name", value);
 
         // Update the name filter.
@@ -209,7 +207,10 @@ export default function Tabledata({ columns, data }) {
                                     }
                                     {/* {console.log(row.cells[0].value)} */}
                                     <td className="px-6 py-4">
-                                        <a href={route("dashboard")}>Edit</a>
+                                        <Modal
+                                            nowData={row.cells}
+                                            nameButton="Edit"
+                                        />
                                     </td>
                                     <td className="px-6 py-4 text-red-600">
                                         <form>

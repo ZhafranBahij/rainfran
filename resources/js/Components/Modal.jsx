@@ -2,7 +2,10 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-export default function MyModal() {
+export default function MyModal({
+    nowData = ["", ""],
+    nameButton = "Create New",
+}) {
     let [isOpen, setIsOpen] = useState(false);
 
     function closeModal() {
@@ -13,7 +16,8 @@ export default function MyModal() {
         setIsOpen(true);
     }
     const [values, setValues] = useState({
-        name: "",
+        id: nowData[0].value,
+        name: nowData[1].value,
     });
 
     function handleChange(e) {
@@ -27,7 +31,12 @@ export default function MyModal() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        Inertia.post("/category", values);
+        if (nowData[0] === "") {
+            Inertia.post("/category", values);
+        } else {
+            Inertia.put(`/category/${values.id}`, values);
+        }
+
         setIsOpen(false);
     }
     return (
@@ -38,7 +47,7 @@ export default function MyModal() {
                     onClick={openModal}
                     className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                 >
-                    Create New
+                    {nameButton}
                 </button>
             </div>
 

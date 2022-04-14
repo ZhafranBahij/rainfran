@@ -18,8 +18,6 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        // $categories = Category::all();
-        // dd($categories);
         return Inertia::render('Category/index', ['categories' => Category::all()]);
     }
 
@@ -42,7 +40,6 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         //
-        // dd($request);
         Category::create($request->all());
         return Redirect::route('category.index');
     }
@@ -77,8 +74,11 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        //
+    {   
+        $category = $category::find($request['id']);
+        $category->name = $request['name'];
+        $category->save();
+        return Redirect::route('category.index');
     }
 
     /**
@@ -89,8 +89,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {   
-        // dd($category);
-        Category::destroy($category['id']);
+        $category::destroy($category['id']);
         return Redirect::route('category.index');
     }
 }
