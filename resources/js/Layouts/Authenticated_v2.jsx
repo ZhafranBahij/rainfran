@@ -50,13 +50,20 @@ export default function Authenticated({ auth, header, children }) {
                     >
                         <CubeIcon className="h-8 text-violet-500 hover:text-violet-300" />
                     </a>
-                    <a
-                        // method="post"
-                        href={route("logout")}
+                    {/* <a
+                        method="post"
+                        href={route(`logout`)}
                         className="w-full flex justify-center"
                     >
                         <LogoutIcon className="h-8 text-violet-500 hover:text-violet-300" />
-                    </a>
+                    </a> */}
+                    <ResponsiveNavLink
+                        method="post"
+                        href={route("logout")}
+                        as="button"
+                    >
+                        Log Out
+                    </ResponsiveNavLink>
                 </div>
             </nav>
 

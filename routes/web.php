@@ -24,11 +24,16 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('/category', 'App\Http\Controllers\CategoryController')->names("category");
+Route::group(['middleware' => ['role:true_admin']], function () {
+    Route::resource('/category', 'App\Http\Controllers\CategoryController')->names("category");
+    Route::get('/fuwa', function () {
+        return Inertia::render('Dashboard2');
+    })->name('fuwa');
+});
 
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard2');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/test', function () {
