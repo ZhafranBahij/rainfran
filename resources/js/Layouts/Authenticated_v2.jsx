@@ -9,6 +9,7 @@ import {
     HomeIcon,
     UserIcon,
     DocumentIcon,
+    CubeIcon,
 } from "@heroicons/react/outline";
 
 export default function Authenticated({ auth, header, children }) {
@@ -40,6 +41,14 @@ export default function Authenticated({ auth, header, children }) {
                         className="w-full flex justify-center"
                     >
                         <DocumentIcon className="h-8 text-violet-500 hover:text-violet-300" />
+                    </a>
+                    <a
+                        // method="post"
+                        // href={route("category")}
+                        href="category"
+                        className="w-full flex justify-center"
+                    >
+                        <CubeIcon className="h-8 text-violet-500 hover:text-violet-300" />
                     </a>
                     <a
                         // method="post"

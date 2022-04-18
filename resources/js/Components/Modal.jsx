@@ -5,6 +5,7 @@ import { Inertia } from "@inertiajs/inertia";
 export default function MyModal({
     nowData = ["", ""],
     nameButton = "Create New",
+    routeName,
 }) {
     let [isOpen, setIsOpen] = useState(false);
 
@@ -32,9 +33,9 @@ export default function MyModal({
     function handleSubmit(e) {
         e.preventDefault();
         if (nowData[0] === "") {
-            Inertia.post("/category", values);
+            Inertia.post(`/${routeName}`, values);
         } else {
-            Inertia.put(`/category/${values.id}`, values);
+            Inertia.put(`/${routeName}/${values.id}`, values);
         }
 
         setIsOpen(false);
@@ -45,7 +46,7 @@ export default function MyModal({
                 <button
                     type="button"
                     onClick={openModal}
-                    className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                    className="px-4 py-2 text-sm font-medium text-white bg-violet-500 hover:bg-violet-300 rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                 >
                     {nameButton}
                 </button>

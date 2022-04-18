@@ -20,14 +20,14 @@ export default function Category(props) {
                 Header: "Categories",
                 accessor: "name",
             },
-            {
-                Header: "Created at",
-                accessor: "created_at",
-            },
-            {
-                Header: "Updated at",
-                accessor: "updated_at",
-            },
+            // {
+            //     Header: "Created at",
+            //     accessor: "created_at",
+            // },
+            // {
+            //     Header: "Updated at",
+            //     accessor: "updated_at",
+            // },
         ],
         []
     );
@@ -36,8 +36,8 @@ export default function Category(props) {
         <Authenticated auth={props.auth} errors={props.errors}>
             <Head title="Category" />
             {/* // apply the table props */}
-            <Modal />
-            <Tabledata columns={columns} data={data} />
+
+            <Tabledata columns={columns} data={data} routeName="category" />
         </Authenticated>
     );
 }
