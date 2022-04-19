@@ -7,13 +7,12 @@ import { Link, Head } from "@inertiajs/inertia-react";
 import Girl from "../../img/Girl_Arun.jpg";
 
 const navigation = [
-    { name: "Product", href: "#" },
-    { name: "Features", href: "#" },
-    { name: "Marketplace", href: "#" },
-    { name: "Company", href: "#" },
+    { name: "Home", href: "#" },
+    { name: "Articles", href: "#" },
+    { name: "About Us", href: "#" },
 ];
 
-export default function Example() {
+export default function Example(props) {
     return (
         <>
             <Head title="Welcome" />
@@ -70,6 +69,17 @@ export default function Example() {
                                                 {item.name}
                                             </Link>
                                         ))}
+                                        {props.auth.user ? (
+                                            <Link
+                                                method="post"
+                                                href={route("logout")}
+                                                className="font-medium text-red-500 hover:text-red-300"
+                                            >
+                                                Logout
+                                            </Link>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </div>
                                 </nav>
                             </div>
@@ -118,6 +128,17 @@ export default function Example() {
                                                     {item.name}
                                                 </a>
                                             ))}
+                                            {props.auth.user ? (
+                                                <Link
+                                                    method="post"
+                                                    href={route("logout")}
+                                                    className="block px-3 py-2 rounded-md text-base font-medium text-red-500 hover:text-red-300"
+                                                >
+                                                    Logout
+                                                </Link>
+                                            ) : (
+                                                <></>
+                                            )}
                                         </div>
                                     </div>
                                 </Popover.Panel>
@@ -135,20 +156,38 @@ export default function Example() {
                                 </p>
                                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                     <div className="rounded-md shadow">
-                                        <Link
-                                            href={route("login")}
-                                            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-                                        >
-                                            It's Show Time
-                                        </Link>
+                                        {props.auth.user ? (
+                                            <Link
+                                                href={route("home")}
+                                                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                                            >
+                                                Melihat Artikel
+                                            </Link>
+                                        ) : (
+                                            <Link
+                                                href={route("login")}
+                                                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                                            >
+                                                It's Show Time
+                                            </Link>
+                                        )}
                                     </div>
                                     <div className="mt-3 sm:mt-0 sm:ml-3">
-                                        <a
-                                            href={route("register")}
-                                            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
-                                        >
-                                            Membuat Identitas
-                                        </a>
+                                        {props.auth.user ? (
+                                            <a
+                                                href={route("home")}
+                                                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+                                            >
+                                                Tentang Rainfran
+                                            </a>
+                                        ) : (
+                                            <a
+                                                href={route("register")}
+                                                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+                                            >
+                                                Membuat Identitas
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </div>

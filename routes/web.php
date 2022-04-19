@@ -24,20 +24,16 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/home', function () {
+    return Inertia::render('Welcome2');
+})->middleware(['auth', 'verified'])->name('home');
+
 Route::group(['middleware' => ['role:true_admin']], function () {
     Route::resource('/category', 'App\Http\Controllers\CategoryController')->names("category");
-    Route::get('/fuwa', function () {
+    Route::get('/dashboard', function () {
         return Inertia::render('Dashboard2');
-    })->name('fuwa');
+    })->name('dashboard');
 });
 
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/test', function () {
-    return Inertia::render('test');
-})->middleware(['auth', 'verified'])->name('test');
 
 require __DIR__.'/auth.php';
