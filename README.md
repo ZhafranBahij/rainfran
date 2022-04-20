@@ -217,3 +217,55 @@ export default function MyModal({
         name: nowData[1].value,
     });
 ```
+
+## Fase 08 : Role
+
+1. Install Laravel Spatie
+
+2. Mencoba assign role di AdminSeeder.php
+
+```s
+    $admin = User::create([
+        'name' => 'Rainfog',
+        'email' => 'kirakira4141@tes.com',
+        'email_verified_at' => now(),
+        'password' => bcrypt('amekiri123'), // password
+        'remember_token' => Str::random(10),
+    ]);
+
+    $admin->assignRole('true_admin');
+```
+
+3. Gunakan ini di web.php agar routingnya aman
+
+```s
+    Route::group(['middleware' => ['role:true_admin']], function () {
+        // Isi dengan beberapa route yang hanya bisa diakses oleh role ini
+    });
+```
+
+4. Taruh ini di kernel.php
+
+```s
+    protected $routeMiddleware = [
+        ...
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+    ];
+```
+
+5. Taruh ini di tempat login biar pas admin masuk ke dashboard dan orang biasa masuk ke tampilan
+
+```s
+        $user = User::where('email', $request['email'])->first();
+        if($user->hasRole('true_admin')){
+            return redirect()->route('dashboard');
+        }
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+```
+
+## Fase 09 : UserArticle Controller
+
+Berhubung agak males main di balik layar(admin), mungkin sekarang akan main di tampilan yang dilihat oleh user.
